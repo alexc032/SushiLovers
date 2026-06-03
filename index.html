@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sushi Lovers — Restaurante & Noodles</title>
+  <meta name="description" content="Sushi Lovers & Noodles — Los mejores sushis especiales en la ciudad. Delivery, comedor y para llevar."/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <nav class="navbar">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 36 36" width="22" height="22" fill="none">
+          <ellipse cx="18" cy="22" rx="10" ry="6" fill="white" opacity=".3"/>
+          <path d="M10 16 Q14 8 18 10 Q22 8 26 16" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <circle cx="18" cy="16" r="3.5" fill="white"/>
+        </svg>
+      </div>
+      <div class="nav-logo-text">
+        <small>Sushi</small>
+        <strong>Lovers<span>.</span></strong>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="#" class="active">Inicio</a>
+      <a href="#menu">Menú</a>
+      <a href="#">Nosotros</a>
+      <a href="#">Reservaciones</a>
+      <a href="#">Contacto</a>
+    </div>
+
+    <div class="nav-search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35" stroke-linecap="round"/>
+      </svg>
+      <input type="search" placeholder="Buscar platillo…" aria-label="Buscar platillo"/>
+    </div>
+
+    <div class="nav-actions">
+      <button id="fab" class="btn-cart" onclick="toggleCart()" aria-label="Ver carrito">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6z" stroke-linejoin="round"/>
+          <path d="M3 6h18" stroke-linecap="round"/>
+          <path d="M16 10a4 4 0 01-8 0" stroke-linecap="round"/>
+        </svg>
+        Mi Carrito
+        <span id="badge">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══ HERO CAROUSEL ══ -->
+  <section id="hero" class="hero">
+
+    <!-- Slide 1 -->
+    <div class="slide active" data-index="0">
+      <img src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=1400&q=85" alt="Promo sushi especial"/>
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-badge">⚡ Solo hoy</div>
+        <h2>2 × <span class="hl">$190</span><br/>Sushis Especiales</h2>
+        <p>Disfruta nuestros rolls más pedidos al mejor precio.<br/>Ingredientes frescos, sabor auténtico.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="addToCart()">¡Ordenar Ya!</button>
+          <button class="btn-ghost">Ver Menú Completo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" data-index="1">
+      <img src="https://images.unsplash.com/photo-1559410545-0bdcd187e0a6?w=1400&q=85" alt="Combo Roll"/>
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-badge gold">🎉 Jueves de Combo</div>
+        <h2>Combo<br/><span class="hl">Sushi Roll</span></h2>
+        <p>8 piezas premium + bebida de tu elección.<br/>El combo más popular de la semana.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="addToCart()">Ver Combo — $220</button>
+          <button class="btn-ghost">Más información</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" data-index="2">
+      <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=1400&q=85" alt="Delivery express"/>
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-badge light">🛵 Delivery Express</div>
+        <h2>Llega en<br/><span class="hl">30 min</span></h2>
+        <p>Envío gratis en tu primera orden.<br/>Rastreo en tiempo real de tu pedido.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="addToCart()">Pedir Ahora</button>
+          <button class="btn-ghost">¿Cómo funciona?</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide" data-index="3">
+      <img src="https://images.unsplash.com/photo-1563612116625-3012372fccce?w=1400&q=85" alt="Ramen Premium"/>
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-badge">🍜 Nuevo en Carta</div>
+        <h2>Ramen<br/><span class="hl-accent">Premium</span></h2>
+        <p>Caldo tonkotsu con 24 horas de cocción.<br/>Auténtico sabor japonés en cada sorbo.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="addToCart()">Probar Ahora</button>
+          <button class="btn-ghost">Ver todos los ramens</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrows -->
+    <button class="hero-arrow prev" onclick="goTo(cur - 1)" aria-label="Anterior">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+    <button class="hero-arrow next" onclick="goTo(cur + 1)" aria-label="Siguiente">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+
+    <!-- Dots -->
+    <div class="hero-dots" id="dots">
+      <button class="dot active" data-d="0" aria-label="Slide 1"></button>
+      <button class="dot" data-d="1" aria-label="Slide 2"></button>
+      <button class="dot" data-d="2" aria-label="Slide 3"></button>
+      <button class="dot" data-d="3" aria-label="Slide 4"></button>
+    </div>
+  </section>
+
+  <!-- ══ INFO BAR ══ -->
+  <div class="info-bar">
+    <div class="info-bar-inner">
+      <div class="restaurant-meta">
+        <div class="restaurant-name">
+          <h1>Sushi Lovers &amp; Noodles</h1>
+          <p>Restaurante Japonés · Calle del Sabor 123</p>
+        </div>
+
+        <div class="meta-pill">
+          <svg class="stars" width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+          <strong>4.8</strong> <span class="count">(528 reseñas)</span>
+        </div>
+
+        <div class="meta-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round"/>
+          </svg>
+          30–45 min entrega
+        </div>
+
+        <span class="badge-open">● Abierto ahora</span>
+      </div>
+
+      <div class="service-cards">
+        <div class="svc-card" onclick="setSvc(this)" id="svc-delivery">
+          <div class="svc-icon" style="background:#fff3ee">🛵</div>
+          <span>Domicilio</span>
+        </div>
+        <div class="svc-card active" onclick="setSvc(this)" id="svc-dine">
+          <div class="svc-icon" style="background:#fff3ee">🍽️</div>
+          <span>Comedor</span>
+        </div>
+        <div class="svc-card" onclick="setSvc(this)" id="svc-pickup">
+          <div class="svc-icon" style="background:#fff3ee">🛍️</div>
+          <span>Para llevar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CATEGORY BAR ══ -->
+  <div class="cat-bar">
+    <div class="cat-bar-inner">
+      <button class="cat-btn active" onclick="setCat(this)">Entradas</button>
+      <button class="cat-btn" onclick="setCat(this)">Ensaladas</button>
+      <button class="cat-btn" onclick="setCat(this)">Makis</button>
+      <button class="cat-btn" onclick="setCat(this)">Nigiris</button>
+      <button class="cat-btn" onclick="setCat(this)">Tempuras</button>
+      <button class="cat-btn" onclick="setCat(this)">Noodles</button>
+      <button class="cat-btn" onclick="setCat(this)">Ramen</button>
+      <button class="cat-btn" onclick="setCat(this)">Postres</button>
+      <button class="cat-btn" onclick="setCat(this)">Bebidas</button>
+    </div>
+  </div>
+
+  <!-- ══ MAIN CONTENT ══ -->
+  <main class="main-content" id="menu">
+
+    <!-- Featured Banner -->
+    <div class="featured-banner">
+      <div>
+        <p style="color:rgba(255,255,255,.5);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">⭐ Más Vendido del Mes</p>
+        <h3>Sushi Especial 2×$190</h3>
+        <p>Atún, salmón, pepino y sésamo tostado. La combinación favorita de nuestros clientes. Pruébalo hoy.</p>
+        <div class="price-big">$190</div>
+        <button class="btn-primary" onclick="addToCart()">Agregar al Carrito</button>
+      </div>
+      <img class="banner-img"
+        src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=400&q=80"
+        alt="Sushi especial"/>
+    </div>
+
+    <!-- Menu Section -->
+    <div class="section-header">
+      <h2>Entradas</h2>
+      <a href="#">Ver todos →</a>
+    </div>
+
+    <div class="menu-grid">
+
+      <!-- Card 1 -->
+      <article class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=600&q=80" alt="Dragon Roll"/>
+          <span class="menu-card-tag tag-popular">🔥 Popular</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Dragon Roll (8 pzas)</h3>
+          <p>Aguacate, salmón, queso crema y salsa ponzu. Un clásico que nunca falla.</p>
+          <div class="menu-card-footer">
+            <div class="price-group">
+              <span class="price">$185</span>
+            </div>
+            <button class="btn-add" onclick="addToCart()" aria-label="Agregar Dragon Roll al carrito">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3v10M3 8h10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1559410545-0bdcd187e0a6?w=600&q=80" alt="Sushi Especial"/>
+          <span class="menu-card-tag tag-promo">⭐ 2×1</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Sushi Especial 2×$190</h3>
+          <p>Atún, salmón, pepino y sésamo tostado. El favorito de la casa.</p>
+          <div class="menu-card-footer">
+            <div class="price-group">
+              <span class="price">$190</span>
+              <span class="price-old">$240</span>
+            </div>
+            <button class="btn-add" onclick="addToCart()" aria-label="Agregar Sushi Especial al carrito">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3v10M3 8h10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="Gyozas"/>
+        </div>
+        <div class="menu-card-body">
+          <h3>Gyozas (6 pzas)</h3>
+          <p>Rellenas de cerdo y vegetales, acompañadas de salsa soya y jengibre fresco.</p>
+          <div class="menu-card-footer">
+            <div class="price-group">
+              <span class="price">$95</span>
+            </div>
+            <button class="btn-add" onclick="addToCart()" aria-label="Agregar Gyozas al carrito">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3v10M3 8h10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1563612116625-3012372fccce?w=600&q=80" alt="Edamame"/>
+          <span class="menu-card-tag tag-new">🆕 Nuevo</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Edamame Salado</h3>
+          <p>Vainas de soya al vapor con sal de mar y aceite de sésamo artesanal.</p>
+          <div class="menu-card-footer">
+            <div class="price-group">
+              <span class="price">$65</span>
+            </div>
+            <button class="btn-add" onclick="addToCart()" aria-label="Agregar Edamame al carrito">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3v10M3 8h10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1617196034099-5b820f0a4e96?w=600&q=80" alt="Takoyaki"/>
+        </div>
+        <div class="menu-card-body">
+          <h3>Takoyaki (6 pzas)</h3>
+          <p>Bolitas de masa con pulpo, mayonesa japonesa y hojuelas de bonito.</p>
+          <div class="menu-card-footer">
+            <div class="price-group">
+              <span class="price">$110</span>
+            </div>
+            <button class="btn-add" onclick="addToCart()" aria-label="Agregar Takoyaki al carrito">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3v10M3 8h10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600&q=80" alt="Miso Soup"/>
+          <span class="menu-card-tag tag-popular">💛 Clásico</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Sopa Miso</h3>
+          <p>Caldo dashi con pasta de miso, tofu suave, cebollín y alga wakame.</p>
+          <div class="menu-card-footer">
+            <div class="price-group">
+              <span class="price">$55</span>
+            </div>
+            <button class="btn-add" onclick="addToCart()" aria-label="Agregar Sopa Miso al carrito">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3v10M3 8h10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Toast notification -->
+  <div id="toast" role="status" aria-live="polite">
+    <svg width="16" height="16" viewBox="0 0 20 20" fill="#4ade80">
+      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+    </svg>
+    ¡Agregado al carrito!
+  </div>
+
+  <script>
+    // ── CAROUSEL ─────────────────────────────────────────────
+    const slides  = document.querySelectorAll('.slide');
+    const dotEls  = document.querySelectorAll('.dot');
+    let cur = 0, autoTimer;
+
+    function goTo(n) {
+      slides[cur].classList.remove('active');
+      dotEls[cur].classList.remove('active');
+      cur = ((n % slides.length) + slides.length) % slides.length;
+      slides[cur].classList.add('active');
+      dotEls[cur].classList.add('active');
+    }
+
+    dotEls.forEach(d => d.addEventListener('click', () => {
+      clearInterval(autoTimer);
+      goTo(+d.dataset.d);
+      autoTimer = setInterval(() => goTo(cur + 1), 5000);
+    }));
+
+    autoTimer = setInterval(() => goTo(cur + 1), 5000);
+
+    // Touch swipe
+    let tx = 0;
+    const heroEl = document.getElementById('hero');
+    heroEl.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    heroEl.addEventListener('touchend', e => {
+      const dx = tx - e.changedTouches[0].clientX;
+      if (Math.abs(dx) > 45) {
+        clearInterval(autoTimer);
+        goTo(cur + (dx > 0 ? 1 : -1));
+        autoTimer = setInterval(() => goTo(cur + 1), 5000);
+      }
+    }, { passive: true });
+
+    // ── SERVICE SELECTOR ─────────────────────────────────────
+    function setSvc(el) {
+      document.querySelectorAll('.svc-card').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    // ── CATEGORY PILLS ───────────────────────────────────────
+    function setCat(el) {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    // ── CART ─────────────────────────────────────────────────
+    let count = 0;
+    const badge = document.getElementById('badge');
+    const toast = document.getElementById('toast');
+
+    function addToCart() {
+      count++;
+      badge.textContent = count;
+      badge.classList.add('show');
+
+      toast.classList.add('show');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function toggleCart() {
+      if (count === 0) return;
+      alert(`Tienes ${count} artículo(s) en tu carrito.\n¡Continúa añadiendo más!`);
+    }
+  </script>
+</body>
+</html>
